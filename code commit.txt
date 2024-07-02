@@ -1,0 +1,47 @@
+code commit
+create RDS:
+select security grp : wizard 2
+connect to rds through cmd prompt
+mysql -h database-1.ctyimaeckknx.ap-south-1.rds.amazonaws.com -P 3306 -u admin -p
+and root= admin change it
+
+
+
+CF - commit folder
+ec2 : ubuntu , ami id
+ami : iam
+role : EC2RoleforCodeDeployFood 
+security grp
+vpc
+subnets
+
+
+
+
+rds---> code commit ---->
+	commit the DB name and the user name
+
+build--->
+
+CF--->
+CF - 
+ec2 : ubuntu , ami id
+ami : iam
+role : EC2RoleforCodeDeployFood 
+security grp
+vpc
+subnets
+ 
+---------->deploy
+
+it will be visible on LB end point
+add -----> / search in build ----->.war
+PucOnclick-1.0-SNAPSHOT
+
+
+after deployment the website will be visible on LB DNS name 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+code commit : vehical
+code build : vehical-build
+code deploy : vehical deploy

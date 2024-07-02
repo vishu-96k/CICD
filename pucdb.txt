@@ -1,0 +1,38 @@
+create database puc;
+use puc;
+create table users
+(username varchar(100) primary key, name varchar(200), mobile bigint, email varchar(200), address varchar(500), licence_no varchar(200));
+create table vehicles
+(registration_no varchar(200) primary key, username varchar(100), foreign key (username) references users(username), chasis_no varchar(100), vehicle_name varchar(100), color varchar(50));
+create table lpg_cng_petrol
+(type varchar(100) primary key, co_level float(2), hydrocarbon int, full_form varchar(200));
+create table diesel
+(type varchar(100) primary key, abs_coeff float(2), max_smoke_den int, full_form varchar(200));
+create table isdiesel
+(registration_no varchar(200), foreign key (registration_no) references vehicles(registration_no), type varchar(100), foreign key (type) references diesel (type));
+create table isother
+(registration_no varchar(200), foreign key (registration_no) references vehicles(registration_no), type varchar(100), foreign key (type) references lpg_cng_petrol (type));
+create table puc
+(puc_no varchar(200) primary key, start_date date, end_date date);
+create table report_p
+(r_no varchar(200) primary key, foreign key (r_no) references vehicles(registration_no), in_co float(2), in_hydro int, puc_no varchar(200), foreign key (puc_no) references puc (puc_no));
+create table report_d
+(r_no varchar(200) primary key, foreign key (r_no) references vehicles(registration_no), in_lac float(2), in_density int, puc_no varchar(200), foreign key (puc_no) references puc (puc_no));
+alter table users add column password varchar(200);
+create table user_vehicle
+(username varchar(100), foreign key (username) references users(username), registration_no varchar(200), foreign key (registration_no) references vehicles(registration_no));
+insert into lpg_cng_petrol
+values('NCC_BS4_BS6', 0.3, 200, 'New Car BS6 and BS4 four-wheelers (CNG/LPG)'),
+('NCP_BS4_BS6', 0.3, 200, 'New Car BS6 and BS4 four-wheelers (Petrol)'),
+('NBC', 0.5, 500, 'New Bike BS6 two-wheelers/three-wheelers (CNG/LPG)'),
+('NBP', 0.5, 500, 'New Bike BS6 two-wheelers/three-wheelers (Petrol)'),
+('OV4_BS2_P', 3, 1500, 'Old BS2 four-wheelers (Petrol)'),
+('OV4_BS3_P', 0.5, 750, 'Old BS3 four-wheelers (Petrol)'),
+('OV24_23W_B', 4.5, 9000, 'Old Two/four-stroke two/three-wheelers manufactured on or before March 31, 2000'),
+('OV2_23W_A', 3.5, 6000, 'Old Two-stroke two/three-wheelers manufactured after March 31, 2000'),
+('OV4_23W_A', 3.5, 4500, 'Old Four-stroke two/three-wheelers manufactured after March 31, 2000');
+insert into diesel
+values('DV_BS4', 1.62, 50, 'Free acceleration test of BS4 diesel vehicles (naturally aspirated and turbocharged engine)'),
+('DV_PreBS4', 2.45, 65, 'Free acceleration test of pre-BS4 diesel vehicles (naturally aspirated and turbocharged engine)');
+create table vehicle_image
+(id int auto_increment primary key, registration_no varchar(200), foreign key (registration_no) references vehicles(registration_no), data longblob);
