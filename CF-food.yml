@@ -28,7 +28,7 @@ Resources:
   LaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties:
-      LaunchTemplateName: vehical-launchtemp
+      LaunchTemplateName: food-launchtemp
       LaunchTemplateData:
         ImageId: ami-0705384c0b33c194c  # Update this with the appropriate Ubuntu AMI ID for your region
         InstanceType: t3.micro
@@ -54,7 +54,7 @@ Resources:
   TargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      Name: vehical-tgtgrp
+      Name: food-tgtgrp
       TargetType: instance
       Protocol: HTTP
       Port: 8080
@@ -87,7 +87,7 @@ Resources:
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
-      AutoScalingGroupName: vehical-asg
+      AutoScalingGroupName: food-asg
       LaunchTemplate:
         LaunchTemplateId: !Ref LaunchTemplate
         Version: !GetAtt LaunchTemplate.LatestVersionNumber
